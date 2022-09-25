@@ -1,0 +1,55 @@
+services:
+    web:
+        container_name: azuracast
+        image: 'ghcr.io/azuracast/azuracast:${AZURACAST_VERSION:-latest}'
+        ports:
+            - '${AZURACAST_HTTP_PORT:-80}:80'
+            - '${AZURACAST_HTTPS_PORT:-443}:443'
+            - '${AZURACAST_SFTP_PORT:-2022}:2022'
+            - '9000:9000'
+            - '9005:9005'
+            - '9006:9006'
+            - '9010:9010'
+            - '9015:9015'
+        env_file: azuracast.env
+        environment:
+            LANG: '${LANG:-en_US.UTF-8}'
+            AZURACAST_DC_REVISION: 14
+            AZURACAST_VERSION: '${AZURACAST_VERSION:-latest}'
+            AZURACAST_SFTP_PORT: '${AZURACAST_SFTP_PORT:-2022}'
+            NGINX_TIMEOUT: '${NGINX_TIMEOUT:-1800}'
+            LETSENCRYPT_HOST: '${LETSENCRYPT_HOST:-}'
+            LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL:-}'
+            PUID: '${AZURACAST_PUID:-1000}'
+            PGID: '${AZURACAST_PGID:-1000}'
+            NGINX_RADIO_PORTS: (9000|9010)
+            NGINX_WEBDJ_PORTS: (9005|9015)
+        volumes:
+            - 'www_uploads:./azuracast/uploads'
+            - 'station_data:./azuracast/stations'
+            - 'shoutcast2_install:./azuracast/servers/shoutcast2'
+            - 'stereo_tool_install:./azuracast/servers/stereo_tool'
+            - 'geolite_install:./azuracast/geoip'
+            - 'sftpgo_data:./azuracast/sftpgo/persist'
+            - 'backups:./azuracast/backups'
+            - 'acme:./azuracast/acme'
+            - 'db_data:./mysql'
+        restart: unless-stopped
+        ulimits:
+            nofile:
+                soft: 65536
+                hard: 65536
+        logging:
+            options:
+                max-size: 1m
+                max-file: '5'
+volumes:
+    db_data: {  }
+    acme: {  }
+    shoutcast2_install: {  }
+    stereo_tool_install: {  }
+    geolite_install: {  }
+    sftpgo_data: {  }
+    station_data: {  }
+    www_uploads: {  }
+    backups: {  }
