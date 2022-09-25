@@ -25,15 +25,15 @@ services:
             NGINX_RADIO_PORTS: (9000|9010)
             NGINX_WEBDJ_PORTS: (9005|9015)
         volumes:
-            - 'www_uploads:/home/ec2-user/azuracast/uploads'
-            - 'station_data:/home/ec2-user/azuracast/stations'
-            - 'shoutcast2_install:/home/ec2-user/azuracast/servers/shoutcast2'
-            - 'stereo_tool_install:/home/ec2-user/home/ec2-user/azuracast/servers/stereo_tool'
-            - 'geolite_install:/home/ec2-user/azuracast/geoip'
-            - 'sftpgo_data:/home/ec2-user/azuracast/sftpgo/persist'
-            - 'backups:/home/ec2-user/azuracast/backups'
-            - 'acme:/home/ec2-user/azuracast/acme'
-            - 'db_data:/home/ec2-user/mysql'
+            - 'www_uploads:/home/ec2-user/azuracast-docker-aws/azuracast/azuracast/uploads'
+            - 'station_data:/home/ec2-user/azuracast-docker-aws/azuracastazuracast/stations'
+            - 'shoutcast2_install:/home/ec2-user/azuracast-docker-aws/azuracastazuracast/servers/shoutcast2'
+            - 'stereo_tool_install:/home/ec2-user/azuracast-docker-aws/azuracast/azuracast/servers/stereo_tool'
+            - 'geolite_install:/home/ec2-user/azuracast-docker-aws/azuracast/azuracast/geoip'
+            - 'sftpgo_data:/home/ec2-user/azuracast-docker-aws/azuracast/azuracast/sftpgo/persist'
+            - 'backups:/home/ec2-user/azuracast-docker-aws/azuracast/azuracast/backups'
+            - 'acme:/home/ec2-user/azuracast-docker-aws/azuracast/azuracast/acme'
+            - 'db_data:/home/ec2-user/azuracast-docker-aws/azuracast/mysql'
         restart: unless-stopped
         ulimits:
             nofile:
