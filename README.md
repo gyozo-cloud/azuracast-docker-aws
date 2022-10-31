@@ -14,13 +14,14 @@ sudo reboot
 
 #Az újraindulás után:
 
-sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-
-sudo chmod +x /usr/local/bin/docker-compose
 
 git clone https://github.com/gyozo-cloud/azuracast-docker-aws
 
 cd /home/ec2-user/azuracast-docker-aws/azuracast
+
+sudo cp docker-compose /usr/local/bin
+
+sudo chmod +x /usr/local/bin/docker-compose
 
 docker-compose up -d
 
